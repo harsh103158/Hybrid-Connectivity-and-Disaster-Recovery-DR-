@@ -10,10 +10,10 @@ Design, implement, and secure a hybrid cloud environment for a small/medium busi
 | :---- | :---- | :---- | :---- |
 | **Region** | (e.g., East US) | (e.g., West US 2\) | Established |
 | **VNet CIDR** | VNet-Prod (10.1.0.0/16) | VNet-DR (10.2.0.0/16) | Established |
-| **Production VM** | VM-Web-Prod | N/A | Source of Replication \[cite: uploaded:Screenshot 2025-11-10 013001.png\] |
+| **Production VM** | VM-Web-Prod | N/A | Source of Replication |
 | **Test Failover VM** | N/A | VM-Web-Prod-test (IP: 10.2.1.4) | Successfully Tested |
 | **Recovery Services Vault** | **RSV** (East US) | **RSV** (East US) | Central hub for DR/BDR |
-| **Target Resource Group** | RG-Prod | RG-Prod-asr \[cite: uploaded:Screenshot 2025-11-10 013321.png\] | Target for replicated resources |
+| **Target Resource Group** | RG-Prod | RG-Prod-asr | Target for replicated resources |
 
 ## **2\. Networking and Security (Key Task: Networking, Security)**
 
@@ -21,21 +21,21 @@ Design, implement, and secure a hybrid cloud environment for a small/medium busi
 
 VNet Peering establishes the non-internet-based route for private communication between the Production and DR regions.
 
-* **Peering Name:** dr-prod-peer \[cite: uploaded:Screenshot 2025-11-11 145010.png\]  
-* **Status:** **Connected** and **Fully Synchronized** \[cite: uploaded:Screenshot 2025-11-11 145010.png\]  
+* **Peering Name:** dr-prod-peer  
+* **Status:** **Connected** and **Fully Synchronized** \!\[VNet Peering Status\](images/Screenshot 2025-11-11 145010.png)  
 * **Configuration:** VNet Peering was configured bidirectionally to ensure full connectivity.
 
 ### **2.2. Network Security Groups (NSGs)**
 
 NSGs were configured to restrict traffic, ensuring only necessary management ports are open, and only to specific source networks.
 
-* **Target NSG:** nsg-dr-test \[cite: uploaded:Screenshot 2025-11-11 132106.png\] (Attached to DR Subnet/NIC)  
+* **Target NSG:** nsg-dr-test (Attached to DR Subnet/NIC) \!\[Edit Subnet showing NSG\](images/Screenshot 2025-11-11 132106.png)  
 * **Security Fix (Critical):** An inbound rule was required to allow RDP from the Production VNet's CIDR (10.1.0.0/16) to the DR VNet.  
   * **Rule:** inboundRDP-from-prod (Priority 100\)  
   * **Source:** 10.1.0.0/16  
   * **Destination:** 10.2.0.0/16 (Or the NIC's IP)  
   * **Port:** 3389 (TCP)  
-  * **Action:** Allow \[cite: uploaded:Screenshot 2025-11-11 132615.png\]
+  * **Action:** Allow \!\[Inbound Security Rule for RDP\](images/Screenshot 2025-11-11 132615.png)
 
 ## **3\. Compute and Secure Access (Key Task: Compute, Security)**
 
@@ -62,7 +62,7 @@ Data protection is achieved using two distinct but complementary services within
 ### **4.2. Azure Site Recovery (ASR) \- DR**
 
 * **Purpose:** Provides **near-real-time continuous replication** of the VM to the DR region, enabling fast recovery for **business continuity**.  
-* **Mechanism:** Uses a Cache Storage to manage write churn and sends data to the target replica disks. Designed for low Recovery Point Objective (RPO) and Recovery Time Objective (RTO). \[cite: uploaded:Screenshot 2025-11-10 001742.png\]
+* **Mechanism:** Uses a Cache Storage to manage write churn and sends data to the target replica disks. Designed for low Recovery Point Objective (RPO) and Recovery Time Objective (RTO).
 
 ## **5\. Storage and Lifecycle Management (Key Task: Storage, Data Protection)**
 
@@ -82,9 +82,9 @@ The first Test Failover was a success on the network and infrastructure layers b
 
 | Issue | Initial Symptom | Resolution Applied | Confirmed Root Cause |
 | :---- | :---- | :---- | :---- |
-| **Connectivity** | RDP Timed out (before NSG fix). | Added inboundRDP-from-prod NSG rule \[cite: uploaded:Screenshot 2025-11-11 132615.png\]. | **Missing NSG Rule** on DR VNet. |
+| **Connectivity** | RDP Timed out (before NSG fix). | Added inboundRDP-from-prod NSG rule. | **Missing NSG Rule** on DR VNet. |
 | **Authentication (NLA)** | "The logon attempt failed" after NSG fix. | Disabled NLA via REG ADD command run via Bastion. | **Strict NLA Setting** blocking the connection. |
-| **Authentication (User)** | "The logon attempt failed" (after NLA fix). | Used simple username (azureuser) \[cite: uploaded:Screenshot 2025-11-11 123425.png\]. | **Incorrect User Format** (domain prefix used in error) \[cite: uploaded:Screenshot 2025-11-11 122435.png\]. |
+| **Authentication (User)** | "The logon attempt failed" (after NLA fix). | Used simple username (azureuser) \!\[Successful Local User Login\](images/Screenshot 2025-11-11 123425.png) | **Incorrect User Format** (domain prefix used in error) \!\[Failing RDP Login with Domain Prefix\](images/Screenshot 2025-11-11 122435.png) |
 | **Residual Failure** | "The logon attempt failed" (after all fixes). | **Action:** Initiate Test Failover Cleanup. | **Confirmed Final Cause:** Unrecoverable **corrupt local user profile** on the Test VM (an intermittent ASR issue). |
 
 ### **Conclusion**
