@@ -22,14 +22,14 @@ Design, implement, and secure a hybrid cloud environment for a small/medium busi
 VNet Peering establishes the non-internet-based route for private communication between the Production and DR regions.
 
 * **Peering Name:** dr-prod-peer  
-* **Status:** **Connected** and **Fully Synchronized** \!\[VNet Peering Status\](images/Screenshot 2025-11-11 145010.png)  
+* **Status:** **Connected** and **Fully Synchronized** ![VNet Peering Status](images/Screenshot 2025-11-11 145010.png)  
 * **Configuration:** VNet Peering was configured bidirectionally to ensure full connectivity.
 
 ### **2.2. Network Security Groups (NSGs)**
 
 NSGs were configured to restrict traffic, ensuring only necessary management ports are open, and only to specific source networks.
 
-* **Target NSG:** nsg-dr-test (Attached to DR Subnet/NIC) \!\[Edit Subnet showing NSG\](images/Screenshot 2025-11-11 132106.png)  
+* **Target NSG:** nsg-dr-test (Attached to DR Subnet/NIC) ![Edit Subnet showing NSG](images/Screenshot 2025-11-11 132106.png)  
 * **Security Fix (Critical):** An inbound rule was required to allow RDP from the Production VNet's CIDR (10.1.0.0/16) to the DR VNet.  
   * **Rule:** inboundRDP-from-prod (Priority 100\)  
   * **Source:** 10.1.0.0/16  
