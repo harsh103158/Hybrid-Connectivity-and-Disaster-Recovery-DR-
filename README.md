@@ -87,7 +87,7 @@ The first Test Failover was a success on the network and infrastructure layers b
 | :---- | :---- | :---- | :---- |
 | **Connectivity** | RDP Timed out (before NSG fix). | Added inboundRDP-from-prod NSG rule. | **Missing NSG Rule** on DR VNet. |
 | **Authentication (NLA)** | "The logon attempt failed" after NSG fix. | Disabled NLA via REG ADD command run via Bastion. | **Strict NLA Setting** blocking the connection. |
-| **Authentication (User)** | "The logon attempt failed" (after NLA fix). | Used simple username (azureuser) \!\[Successful Local User Login\](images/Screenshot 2025-11-11 123425.png) | **Incorrect User Format** (domain prefix used in error) \!\[Failing RDP Login with Domain Prefix\](images/Screenshot 2025-11-11 122435.png) |
+| **Authentication (User)** | "The logon attempt failed" (after NLA fix). | Used simple username (azureuser) \!\[Successful Local User Login\](images/Screenshot 2025-11-11 123425.png) | **Incorrect User Format** (domain prefix used in error) \ ![Failing RDP Login with Domain Prefix](https://github.com/harsh103158/Hybrid-Connectivity-and-Disaster-Recovery-DR-/blob/53a59cb1513526f5173695e73347438e8c8577bc/images/Screenshot%202025-11-11%20122435.png) |
 | **Residual Failure** | "The logon attempt failed" (after all fixes). | **Action:** Initiate Test Failover Cleanup. | **Confirmed Final Cause:** Unrecoverable **corrupt local user profile** on the Test VM (an intermittent ASR issue). |
 
 ### **Conclusion**
