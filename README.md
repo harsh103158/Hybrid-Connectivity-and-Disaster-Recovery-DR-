@@ -63,7 +63,7 @@ Data protection is achieved using two distinct but complementary services within
 
 * **Purpose:** Provides **near-real-time continuous replication** of the VM to the DR region, enabling fast recovery for **business continuity**.  
 * **Mechanism:** Uses a Cache Storage to manage write churn and sends data to the target replica disks. Designed for low Recovery Point Objective (RPO) and Recovery Time Objective (RTO).
-
+![ASR-DR](https://github.com/harsh103158/Hybrid-Connectivity-and-Disaster-Recovery-DR-/blob/63969172f4f89c7fa12440d71ee443db88322580/images/Screenshot%202025-11-10%20001742.png)
 ## **5\. Storage and Lifecycle Management (Key Task: Storage, Data Protection)**
 
 ### **5.1. Storage Accounts and Tiers**
