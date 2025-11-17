@@ -35,7 +35,7 @@ NSGs were configured to restrict traffic, ensuring only necessary management por
   * **Source:** 10.1.0.0/16  
   * **Destination:** 10.2.0.0/16 (Or the NIC's IP)  
   * **Port:** 3389 (TCP)  
-  * **Action:** Allow \!\[Inbound Security Rule for RDP\](images/Screenshot 2025-11-11 132615.png)
+  * **Action:** Allow ![Inbound Security Rule for RDP](https://github.com/harsh103158/Hybrid-Connectivity-and-Disaster-Recovery-DR-/blob/ea3220858800f0688431ef4e335e808f1e4aa0b7/images/Screenshot%202025-11-11%20132615.png)
 
 ## **3\. Compute and Secure Access (Key Task: Compute, Security)**
 
