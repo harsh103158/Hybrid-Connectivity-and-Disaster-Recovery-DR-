@@ -22,7 +22,7 @@ Design, implement, and secure a hybrid cloud environment for a small/medium busi
 VNet Peering establishes the non-internet-based route for private communication between the Production and DR regions.
 
 * **Peering Name:** dr-prod-peer  
-* **Status:** **Connected** and **Fully Synchronized** ![VNet Peering Status](images/Screenshot 2025-11-11 145010.png)  
+* **Status:** **Connected** and **Fully Synchronized** ![VNet Peering Status](https://github.com/harsh103158/Hybrid-Connectivity-and-Disaster-Recovery-DR-/blob/4473dd07a1626b2ef87c87dcedd5274a3404e60d/images/Screenshot%202025-11-11%20145010.png)  
 * **Configuration:** VNet Peering was configured bidirectionally to ensure full connectivity.
 
 ### **2.2. Network Security Groups (NSGs)**
